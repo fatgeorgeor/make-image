@@ -6,4 +6,5 @@
 4. 上传文件（不能是文件夹哦）到windows文件夹
 5. 退出啦
 6. 感谢 史坨坨 刘贵贵 烨狗子
+7. **请把文件夹中的内容放到/home/wocloud/hua 目录下否则无法运行，执行python operators_great_again.py运行**
 
