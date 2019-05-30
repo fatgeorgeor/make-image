@@ -18,8 +18,8 @@ class Commandmountimg:
     def input_par(self):
         path = ""
         while not os.path.isdir(path):
-            path = raw_input("Pls input the path where your iso is  (press 'ENTER': /var/www/html):")
-            if not path:
+            path = raw_input("Pls input the path where your iso is (press 'ENTER' as default path: /var/www/html):")
+            if not exists(path):
                 path = "/var/www/html"
                 print path
             elif not os.path.isdir(path):
@@ -27,24 +27,31 @@ class Commandmountimg:
             else:
                 print path
         self.isopath = path
+
         isofilepath = ""
         isoname = ""
-        while not exists(isofilepath) or isoname == "":
+        while not exists(isofilepath) or not isoname:
             isoname = raw_input("\nPls input iso name which you already put in, my lord ( eg: newbeek+.iso = newbeek+) :")
-            if not exists(isofilepath):
-                print "You may not use your force to enter a filename at this moment, my young apprentice"
+            isofilepath = os.path.join(path, isoname)
+            # print isofilepath + ".iso"
+            if not isoname:
+                print "\n\n\n\nYou may not use your force to enter a filename at this moment, my young apprentice"
                 # "\nImagine there's no heaven(this direction), it's easy if you try   ----John Lennon <<Imagine>> 11 October 1971"
                 print "Pls choose from below, my lord : "
                 for file in os.listdir(path):
-                    stdout.write(file + " ")
-            elif isoname != "":
-                print "There's no such file : " + path + "/" + isoname
+                    stdout.write(file + "  ")
+            elif not os.path.isfile(isofilepath + ".iso"):
+                print "\n\n\n\nThere's no such file : " + path + "/" + isoname
+                print "There is such file : " + isofilepath.strip("\n") + ".iso"
                 print "Pls choose from below, my lord : "
                 for file in os.listdir(path):
-                    stdout.write(file + " ")
-            else:
-                print isofilepath
-            isofilepath = os.path.join(path, isoname)
+                    stdout.write(file + "  ")
+            elif exists(isofilepath + ".iso"):
+                print "There is such file : " + isofilepath.strip("\n") + ".iso"
+                print "Pls choose from below, my lord : "
+                break
+        isofilepath = os.path.join(path, isoname)
+        # print isofilepath
         self.isofilepath = isofilepath
 
 
