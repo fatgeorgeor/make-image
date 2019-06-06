@@ -11,6 +11,7 @@ import subprocess
 from parameter_acquire import *
 from parameter_acquire.input_img import Commandmountimg
 from Transfiles.trans import *
+from rpm.rpm_install import *
 
 
 # 挂载需要进行编辑的镜像并复制到临时地址
@@ -33,7 +34,7 @@ def mount_img(isopath, isofilepath):
 
 # 制作镜像
 def make_img(isopath, newisoname):
-    makeimagepath = "/home/wocloud/hua/makeimg.sh"
+    makeimagepath = os.getcwd() + "/makeimg.sh"
     copyfilepath = os.path.join(isopath, copypoint)
     try:
         #os.system(makeimagepath + " " + copyfilepath + " " + isopath + " " + newisoname)
@@ -42,11 +43,11 @@ def make_img(isopath, newisoname):
     except (IOError, ValueError), x:
         print x
     else:
-        print "finished"
+        print "successed"
         sys.exit(0)
 
 if __name__ == "__main__":
-    print "which function would you like to use ? \n 0.help\n 1.receive files from Windows "
+    print "which function would you like to use ? \n 0.help & environment check(must choose first time you run this script)\n 1.receive files from Windows "
     print " 2.mount image and copy to writable file 123 \n 3.make new image after make some changes to Packages and ks.cfg"
     print " 4.send files to Windows (only when using secureCRT console, preset topbar->Session Options->X/Y/Zmodem->Download is required)\n 5.quit \n press num to continue \n"
     flag = True
@@ -84,8 +85,10 @@ if __name__ == "__main__":
             command.send_files()
         elif "0" ==answer:
             print open("/home/wocloud/hua/README.md", "r").read()
+            command = Installation()
+            command.rpminstall()
         else:
-            print "Enter something on your keyboard, You Douche"
+            print "Enter something on your keyboard, You are such a Douche"
             quit()
 
 
