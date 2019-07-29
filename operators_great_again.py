@@ -84,7 +84,7 @@ if __name__ == "__main__":
             command = Transfiles()
             command.send_files()
         elif "0" ==answer:
-            print open("/home/wocloud/hua/README.md", "r").read()
+            print open(os.getcwd() + "/README.md", "r").read()
             command = Installation()
             command.rpminstall()
         else:
