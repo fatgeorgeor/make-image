@@ -24,6 +24,9 @@ def mount_img(isopath, isofilepath):
         os.system("rm -rf " + copyfilepath)
         os.system("mkdir -p " + isofilepath)
         os.system("mount -o loop " + isofilepath + ".iso " + isofilepath)
+    else:
+        os.system("mkdir -p " + isofilepath)
+        os.system("mount -o loop " + isofilepath + ".iso " + isofilepath)
     copy_tree(isofilepath, copyfilepath)
     print "done"
     print "Now iso file is ready in " + copyfilepath + ", Pls follow the procedures below manually which can't be done by this script"
